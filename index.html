@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Lunch Jackpot</title>
+  <meta name="theme-color" content="#190f08">
+  <meta name="description" content="A fun slot-machine lunch picker for the office.">
+  <link rel="icon" type="image/png" href="images/favicon-32.png">
+  <link rel="apple-touch-icon" href="images/icon-192.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <section class="phone">
+      <header class="hero">
+        <div class="hero__actions">
+          <button id="musicToggle" class="circle-btn" type="button" title="Music">🎵</button>
+          <button id="resetStats" class="circle-btn" type="button" title="Reset stats">↻</button>
+        </div>
+        <p class="eyebrow">🍽️ Office Lunch Picker</p>
+        <h1>Lunch Jackpot</h1>
+        <p class="tagline">Can’t decide what to eat? Let luck decide.</p>
+        <p id="musicNotice" class="music-notice">🎵 Music will start automatically if your browser allows it.</p>
+        <audio id="bgMusic" loop autoplay preload="auto">
+          <source src="sounds/bgm.mp3" type="audio/mpeg">
+          <source src="bg-music.mp3" type="audio/mpeg">
+        </audio>
+      </header>
+
+      <section class="machine" aria-label="Lunch slot machine">
+        <div class="machine__marquee">★ TODAY’S LUNCH ★</div>
+        <div class="bulbs" aria-hidden="true"></div>
+        <div class="reels">
+          <div class="reel" id="reelCategory">
+            <p class="reel__label">Category</p>
+            <div class="reel__window"><div class="reel__strip" id="stripCategory"></div></div>
+          </div>
+          <div class="reel" id="reelDish">
+            <p class="reel__label">Dish</p>
+            <div class="reel__window"><div class="reel__strip" id="stripDish"></div></div>
+          </div>
+          <div class="reel" id="reelChallenge">
+            <p class="reel__label">Challenge</p>
+            <div class="reel__window"><div class="reel__strip" id="stripChallenge"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <button id="spinButton" class="spin-button" type="button">🎰 Spin Jackpot</button>
+
+      <section class="result-card" aria-live="polite">
+        <div class="result-card__top">
+          <p>Your Lunch Jackpot</p>
+          <span id="rarityBadge" class="rarity rarity--ready">READY</span>
+        </div>
+        <h2 id="resultDish">Ready to spin?</h2>
+        <div class="chips">
+          <span id="resultCategory">🍴 Awaiting hunger signal</span>
+          <span id="resultBudget">💰 RM?</span>
+          <span id="resultChallenge">🎯 Spin first</span>
+        </div>
+        <p id="resultFortune" class="fortune">Your lunch fate is currently marinating.</p>
+      </section>
+
+      <section class="quick-actions">
+        <button id="favoriteButton" type="button">♡ Favorite</button>
+        <button id="nearbyButton" type="button">📍 Nearby</button>
+        <button id="shareButton" type="button">📤 Share</button>
+      </section>
+
+      <nav class="tabs" aria-label="Dashboard tabs">
+        <button class="tab tab--active" data-panel="statsPanel" type="button">📊 Stats</button>
+        <button class="tab" data-panel="historyPanel" type="button">🕘 History</button>
+        <button class="tab" data-panel="favoritesPanel" type="button">♡ Faves</button>
+      </nav>
+
+      <section id="statsPanel" class="panel panel--active">
+        <div class="stats-grid">
+          <div><span>Total</span><strong id="totalSpins">0</strong></div>
+          <div><span>Top Cat.</span><strong id="topCategory">-</strong></div>
+          <div><span>Top Dish</span><strong id="topDish">-</strong></div>
+        </div>
+      </section>
+
+      <section id="historyPanel" class="panel">
+        <ol id="historyList"><li>No spins yet.</li></ol>
+      </section>
+
+      <section id="favoritesPanel" class="panel">
+        <div id="favoritesList" class="favorites"><span>No favorites yet.</span></div>
+      </section>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status">Saved</div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
