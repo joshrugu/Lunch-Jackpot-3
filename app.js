@@ -90,7 +90,18 @@
   }
 
   function fillStrip(strip, items) {
+    strip.classList.remove("reel__strip--final");
     strip.innerHTML = items.map((item) => slotHTML(item.emoji, item.text)).join("");
+  }
+
+  function showFinalReels(result) {
+    fillStrip(els.strips.category, [{ emoji: result.category.emoji, text: result.category.name }]);
+    fillStrip(els.strips.dish, [{ emoji: result.category.emoji, text: result.dish }]);
+    fillStrip(els.strips.challenge, [{ emoji: "🎯", text: result.challenge }]);
+
+    Object.values(els.strips).forEach((strip) => {
+      strip.classList.add("reel__strip--final");
+    });
   }
 
   function allDishes() {
@@ -223,6 +234,7 @@
 
     setTimeout(() => {
       els.reels.forEach((reel) => reel.classList.remove("reel--spinning"));
+      showFinalReels(result);
       applyResult(result);
       els.spin.disabled = false;
     }, 1250);
@@ -291,6 +303,7 @@
     fillStrip(els.strips.category, [{ emoji: "🍜", text: "Ready" }]);
     fillStrip(els.strips.dish, [{ emoji: "🍽️", text: "Set" }]);
     fillStrip(els.strips.challenge, [{ emoji: "🎯", text: "Spin" }]);
+    Object.values(els.strips).forEach((strip) => strip.classList.add("reel__strip--final"));
   }
 
   window.addEventListener("load", () => tryStartMusic(true));

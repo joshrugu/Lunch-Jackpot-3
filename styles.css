@@ -187,3 +187,42 @@ li{margin-bottom:5px}
 @media(max-height:720px){
   .music-notice{display:none}
 }
+
+
+/* Fix: keep music/reset buttons away from the Lunch Jackpot title */
+.hero{
+  padding-top: 2px;
+}
+.hero__actions{
+  top: 2px;
+  right: 2px;
+  gap: 4px;
+}
+.circle-btn{
+  width: 26px;
+  height: 26px;
+  font-size: 12px;
+  line-height: 1;
+  padding: 0;
+}
+.eyebrow{
+  padding-right: 64px;
+  padding-left: 64px;
+}
+@media(max-width:380px){
+  .circle-btn{
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+  }
+  .eyebrow{
+    padding-right: 56px;
+    padding-left: 56px;
+  }
+}
+
+/* Fix: final reel cards should clearly show the chosen result */
+.reel__strip--final{
+  animation: none !important;
+  transform: translateY(0) !important;
+}

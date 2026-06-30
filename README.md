@@ -33,3 +33,9 @@ Settings > Pages > Deploy from branch > main > /root.
 
 ## Autoplay note
 This version tries to start music when the page opens. Some browsers, especially mobile Safari and Chrome, block autoplay with sound until the user taps the page. If blocked, the music will start after the user taps Spin or the music button.
+
+
+## Fixes in this version
+- Music/reset buttons are smaller and no longer block the Lunch Jackpot title.
+- Slot reel cards now show the exact same final result as the jackpot card.
+- Stats and history are based on the same chosen result.
