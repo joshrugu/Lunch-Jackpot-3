@@ -35,7 +35,10 @@ Settings > Pages > Deploy from branch > main > /root.
 This version tries to start music when the page opens. Some browsers, especially mobile Safari and Chrome, block autoplay with sound until the user taps the page. If blocked, the music will start after the user taps Spin or the music button.
 
 
-## Fixes in this version
-- Music/reset buttons are smaller and no longer block the Lunch Jackpot title.
-- Slot reel cards now show the exact same final result as the jackpot card.
-- Stats and history are based on the same chosen result.
+## Important cache note
+If the website looks unchanged after upload:
+1. Open GitHub repository > Code and confirm the new files were uploaded.
+2. Wait for GitHub Actions / Pages deployment to finish.
+3. Open the website in Incognito/Private mode.
+4. Or add `?v=3` to the end of the URL, for example:
+   https://yourname.github.io/lunch-jackpot/?v=3

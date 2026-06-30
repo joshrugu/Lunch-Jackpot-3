@@ -89,46 +89,32 @@
     return `<div class="slot"><div><strong>${emoji}</strong><span>${text}</span></div></div>`;
   }
 
-  function fillStrip(strip, items) {
-    strip.classList.remove("reel__strip--final");
-    strip.innerHTML = items.map((item) => slotHTML(item.emoji, item.text)).join("");
+  function setStrip(strip, emoji, text) {
+    strip.classList.add("is-final");
+    strip.innerHTML = slotHTML(emoji, text);
+  }
+
+  function setRandomReels() {
+    const c1 = pick(DATA.categories);
+    const c2 = pick(DATA.categories);
+    els.strips.category.classList.remove("is-final");
+    els.strips.dish.classList.remove("is-final");
+    els.strips.challenge.classList.remove("is-final");
+    els.strips.category.innerHTML = slotHTML(c1.emoji, c1.name);
+    els.strips.dish.innerHTML = slotHTML(c2.emoji, pick(c2.items));
+    els.strips.challenge.innerHTML = slotHTML(pick(["🎯","👥","🌶️","💰","📸","⭐","🎲"]), pick(DATA.challenges));
   }
 
   function showFinalReels(result) {
-    fillStrip(els.strips.category, [{ emoji: result.category.emoji, text: result.category.name }]);
-    fillStrip(els.strips.dish, [{ emoji: result.category.emoji, text: result.dish }]);
-    fillStrip(els.strips.challenge, [{ emoji: "🎯", text: result.challenge }]);
-
-    Object.values(els.strips).forEach((strip) => {
-      strip.classList.add("reel__strip--final");
-    });
+    setStrip(els.strips.category, result.category.emoji, result.category.name);
+    setStrip(els.strips.dish, result.category.emoji, result.dish);
+    setStrip(els.strips.challenge, "🎯", result.challenge);
   }
 
   function allDishes() {
     return DATA.categories.flatMap((category) => category.items);
   }
 
-  function randomItemFor(type, finalItem) {
-    const items = [];
-    for (let i = 0; i < 9; i++) {
-      if (type === "category") {
-        const c = pick(DATA.categories);
-        items.push({ emoji: c.emoji, text: c.name });
-      }
-      if (type === "dish") {
-        const c = pick(DATA.categories);
-        items.push({ emoji: c.emoji, text: pick(c.items) });
-      }
-      if (type === "challenge") {
-        items.push({
-          emoji: pick(["🎯", "👥", "🌶️", "💰", "📸", "⭐", "🎲"]),
-          text: pick(DATA.challenges)
-        });
-      }
-    }
-    items.push(finalItem);
-    return items;
-  }
 
   function chooseCategory() {
     const roll = Math.random();
@@ -223,21 +209,24 @@
     const result = chooseResult();
     startMusicFromGesture();
 
-    fillStrip(els.strips.category, randomItemFor("category", { emoji: result.category.emoji, text: result.category.name }));
-    fillStrip(els.strips.dish, randomItemFor("dish", { emoji: result.category.emoji, text: result.dish }));
-    fillStrip(els.strips.challenge, randomItemFor("challenge", { emoji: "🎯", text: result.challenge }));
-
     els.spin.disabled = true;
     els.resultDish.textContent = "Spinning...";
     els.resultFortune.textContent = "The lunch machine is shuffling destiny.";
     els.reels.forEach((reel) => reel.classList.add("reel--spinning"));
 
-    setTimeout(() => {
-      els.reels.forEach((reel) => reel.classList.remove("reel--spinning"));
-      showFinalReels(result);
-      applyResult(result);
-      els.spin.disabled = false;
-    }, 1250);
+    let ticks = 0;
+    const shuffleTimer = setInterval(() => {
+      setRandomReels();
+      ticks += 1;
+
+      if (ticks >= 14) {
+        clearInterval(shuffleTimer);
+        els.reels.forEach((reel) => reel.classList.remove("reel--spinning"));
+        showFinalReels(result);
+        applyResult(result);
+        els.spin.disabled = false;
+      }
+    }, 95);
   }
 
   function favoriteCurrent() {
@@ -303,7 +292,6 @@
     fillStrip(els.strips.category, [{ emoji: "🍜", text: "Ready" }]);
     fillStrip(els.strips.dish, [{ emoji: "🍽️", text: "Set" }]);
     fillStrip(els.strips.challenge, [{ emoji: "🎯", text: "Spin" }]);
-    Object.values(els.strips).forEach((strip) => strip.classList.add("reel__strip--final"));
   }
 
   window.addEventListener("load", () => tryStartMusic(true));

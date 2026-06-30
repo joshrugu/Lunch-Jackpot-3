@@ -189,40 +189,34 @@ li{margin-bottom:5px}
 }
 
 
-/* Fix: keep music/reset buttons away from the Lunch Jackpot title */
-.hero{
-  padding-top: 2px;
+/* OBVIOUS FIX: music/reset controls are no longer on top of the title */
+.hero__actions{display:none!important}
+.header-controls{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:8px;
 }
-.hero__actions{
-  top: 2px;
-  right: 2px;
-  gap: 4px;
+.control-pill{
+  width:auto;
+  min-width:82px;
+  height:28px;
+  border-radius:999px;
+  border:1px solid rgba(29,16,8,.12);
+  background:#fff;
+  color:#1d1008;
+  font-size:12px;
+  font-weight:900;
+  padding:0 10px;
 }
-.circle-btn{
-  width: 26px;
-  height: 26px;
-  font-size: 12px;
-  line-height: 1;
-  padding: 0;
-}
-.eyebrow{
-  padding-right: 64px;
-  padding-left: 64px;
-}
-@media(max-width:380px){
-  .circle-btn{
-    width: 24px;
-    height: 24px;
-    font-size: 11px;
-  }
-  .eyebrow{
-    padding-right: 56px;
-    padding-left: 56px;
-  }
-}
+.circle-btn{display:none!important}
 
-/* Fix: final reel cards should clearly show the chosen result */
-.reel__strip--final{
-  animation: none !important;
-  transform: translateY(0) !important;
+/* OBVIOUS FIX: final slot content is direct, centered, and not using animation transform */
+.reel__strip.is-final{
+  transform:none!important;
+  animation:none!important;
+  transition:none!important;
+}
+.reel:not(.reel--spinning) .reel__strip{
+  transform:none!important;
 }

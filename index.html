@@ -15,14 +15,16 @@
   <main class="app">
     <section class="phone">
       <header class="hero">
-        <div class="hero__actions">
-          <button id="musicToggle" class="circle-btn" type="button" title="Music">🎵</button>
-          <button id="resetStats" class="circle-btn" type="button" title="Reset stats">↻</button>
-        </div>
-        <p class="eyebrow">🍽️ Office Lunch Picker</p>
+<p class="eyebrow">🍽️ Office Lunch Picker</p>
         <h1>Lunch Jackpot</h1>
         <p class="tagline">Can’t decide what to eat? Let luck decide.</p>
         <p id="musicNotice" class="music-notice">🎵 Music will start automatically if your browser allows it.</p>
+
+        <div class="header-controls">
+          <button id="musicToggle" class="control-pill" type="button" title="Music">🎵 Music</button>
+          <button id="resetStats" class="control-pill" type="button" title="Reset stats">↻ Reset</button>
+        </div>
+
         <audio id="bgMusic" loop autoplay preload="auto">
           <source src="sounds/bgm.mp3" type="audio/mpeg">
           <source src="bg-music.mp3" type="audio/mpeg">
